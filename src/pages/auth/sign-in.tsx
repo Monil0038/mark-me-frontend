@@ -1,5 +1,7 @@
 import { useState } from "react"
-import ViteLogo from "@/assets/vite.svg"
+import { Link } from "react-router-dom"
+import Logo from "@/assets/logo.png"
+import { useNavigate } from "react-router-dom"
 
 export default function SignIn() {
   const [email, setEmail] = useState("")
@@ -7,6 +9,7 @@ export default function SignIn() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
+  const navigate = useNavigate()
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -17,15 +20,12 @@ export default function SignIn() {
     try {
       const response = await fetch("https://mark-me-backend.onrender.com/faculty/login", {
         method: "POST",
-        mode: "cors", // ensure CORS
-        headers: {
-          "Content-Type": "application/json",
-        },
+        mode: "cors",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       })
 
       if (!response.ok) {
-        // try reading error body for debugging
         const errText = await response.text()
         throw new Error(errText || "Login failed")
       }
@@ -33,8 +33,7 @@ export default function SignIn() {
       const data = await response.json()
       setSuccess("Login successful")
       console.log("API Response:", data)
-      
-      // store token if API sends one
+
       if (data.token) {
         localStorage.setItem("authToken", data.token)
       }
@@ -42,7 +41,7 @@ export default function SignIn() {
         localStorage.setItem("user", JSON.stringify(data.user))
       }
 
-      window.location.href = "/"
+      navigate("/dashboard", { replace: true })
     } catch (err: any) {
       setError(err.message || "Something went wrong")
     } finally {
@@ -56,7 +55,7 @@ export default function SignIn() {
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
         <div className="absolute inset-0 bg-zinc-900" />
         <div className="relative z-20 flex items-center text-lg font-medium">
-          <svg
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="none"
@@ -67,27 +66,17 @@ export default function SignIn() {
             className="mr-2 h-6 w-6"
           >
             <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
-          </svg>
-          Shadcn Admin
+          </svg> */}
+          Mark Me
         </div>
 
         <img
-          src={ViteLogo}
+          src={Logo}
           className="relative m-auto"
           width={301}
           height={60}
           alt="Vite"
         />
-
-        <div className="relative z-20 mt-auto">
-          <blockquote className="space-y-2">
-            <p className="text-lg">
-              “This library has saved me countless hours of work and helped me
-              deliver stunning designs to my clients faster than ever before.”
-            </p>
-            <footer className="text-sm">Sofia Davis</footer>
-          </blockquote>
-        </div>
       </div>
 
       {/* RIGHT PANEL (FORM) */}
@@ -126,6 +115,22 @@ export default function SignIn() {
               {loading ? "Logging in..." : "Login"}
             </button>
           </form>
+
+          {/* Forgot password + Sign up buttons */}
+          <div className="flex justify-between text-sm mt-2">
+            <Link
+              to="/forgot-password"
+              className="text-blue-600 hover:underline"
+            >
+              Forgot Password?
+            </Link>
+            {/* <Link
+              to="/sign-up"
+              className="text-blue-600 hover:underline"
+            >
+              Sign Up
+            </Link> */}
+          </div>
 
           {error && <p className="text-red-500 text-sm">{error}</p>}
           {success && <p className="text-green-500 text-sm">{success}</p>}

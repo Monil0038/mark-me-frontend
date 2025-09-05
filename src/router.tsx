@@ -3,22 +3,78 @@ import GeneralError from './pages/errors/general-error'
 import NotFoundError from './pages/errors/not-found-error'
 import MaintenanceError from './pages/errors/maintenance-error'
 import UnauthorisedError from './pages/errors/unauthorised-error.tsx'
+import ProtectedRoute from './components/ProtectedRoute.tsx'
+import { Navigate } from "react-router-dom"
 
 const router = createBrowserRouter([
 
   {
-    path: '/',
+    path: "/",
     lazy: async () => {
-      const AppShell = await import('./components/app-shell')
+      const AppShell = await import("./components/app-shell")
       return { Component: AppShell.default }
     },
     errorElement: <GeneralError />,
     children: [
+      // ---- PROTECTED ROUTES WRAPPED BY ProtectedRoute ----
       {
-        index: true,
-        lazy: async () => ({
-          Component: (await import('./pages/dashboard/overview')).default,
-        }),
+        element: <ProtectedRoute />, // wrapper that checks auth and renders children via <Outlet/>
+        children: [
+          // root -> dashboard redirect
+          { index: true, element: <Navigate to="/dashboard" replace /> },
+
+          // dashboard (protected)
+          {
+            path: "dashboard",
+            lazy: async () => ({
+              Component: (await import("./pages/dashboard")).default,
+            }),
+          },
+
+          // faculty (protected) with nested children
+          {
+            path: "faculty",
+            lazy: async () => ({
+              Component: (await import("./pages/product")).default,
+            }),
+            children: [
+              {
+                index: true,
+                lazy: async () => ({
+                  Component: (await import("./pages/product/list")).default,
+                }),
+              },
+              {
+                path: "add-faculty",
+                lazy: async () => ({
+                  Component: (await import("./pages/product/add")).default,
+                }),
+              },
+            ],
+          },
+
+          // student (protected) with nested children
+          {
+            path: "student",
+            lazy: async () => ({
+              Component: (await import("./pages/student")).default,
+            }),
+            children: [
+              {
+                index: true,
+                lazy: async () => ({
+                  Component: (await import("./pages/student/list")).default,
+                }),
+              },
+              {
+                path: "add-student",
+                lazy: async () => ({
+                  Component: (await import("./pages/student/add")).default,
+                }),
+              },
+            ],
+          },
+        ],
       },
       {
         path: 'kanban',
@@ -26,52 +82,12 @@ const router = createBrowserRouter([
           Component: (await import('@/pages/kanban')).default,
         }),
       },
-      {
-        path: 'faculty',
-        lazy: async () => ({
-          Component: (await import('./pages/product')).default,
-        }),
-        children: [
-          {
-            index: true,
-            lazy: async () => ({
-              Component: (await import('./pages/product/list')).default,
-            }),
-          },
-          {
-            path: 'add-faculty',
-            lazy: async () => ({
-              Component: (await import('./pages/product/add')).default,
-            }),
-          },
-        ],
-      },
-      {
-        path: 'student',
-        lazy: async () => ({
-          Component: (await import('./pages/student')).default,
-        }),
-        children: [
-          {
-            index: true,
-            lazy: async () => ({
-              Component: (await import('./pages/student/list')).default,
-            }),
-          },
-          {
-            path: 'add-student',
-            lazy: async () => ({
-              Component: (await import('./pages/student/add')).default,
-            }),
-          },
-        ],
-      },
-      {
-        path: 'dashboard',
-        lazy: async () => ({
-          Component: (await import('@/pages/dashboard')).default,
-        }),
-      },
+      // {
+      //   path: 'dashboard',
+      //   lazy: async () => ({
+      //     Component: (await import('@/pages/dashboard')).default,
+      //   }),
+      // },
       {
         path: 'chats',
         lazy: async () => ({
