@@ -35,7 +35,7 @@ export const sidelinks: SideLink[] = [
   {
     title: 'Faculty',
     label: '',
-    href: '/product',
+    href: '/faculty',
     icon: <IconChecklist size={18} />,
     // sub: [
     //   {

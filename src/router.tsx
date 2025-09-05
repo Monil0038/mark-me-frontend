@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         }),
       },
       {
-        path: 'product',
+        path: 'faculty',
         lazy: async () => ({
           Component: (await import('./pages/product')).default,
         }),
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
             }),
           },
           {
-            path: 'add-product',
+            path: 'add-faculty',
             lazy: async () => ({
               Component: (await import('./pages/product/add')).default,
             }),
