@@ -47,6 +47,26 @@ const router = createBrowserRouter([
         ],
       },
       {
+        path: 'student',
+        lazy: async () => ({
+          Component: (await import('./pages/student')).default,
+        }),
+        children: [
+          {
+            index: true,
+            lazy: async () => ({
+              Component: (await import('./pages/student/list')).default,
+            }),
+          },
+          {
+            path: 'add-student',
+            lazy: async () => ({
+              Component: (await import('./pages/student/add')).default,
+            }),
+          },
+        ],
+      },
+      {
         path: 'dashboard',
         lazy: async () => ({
           Component: (await import('@/pages/dashboard')).default,

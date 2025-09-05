@@ -12,6 +12,14 @@ import {
 } from '@/components/ui/dropdown-menu'
 
 export function UserNav() {
+  const handleLogout = () => {
+    // ✅ Remove token
+    localStorage.removeItem("authToken")
+
+    // ✅ Redirect to main page
+    window.location.href = "/sign-in"
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -48,7 +56,7 @@ export function UserNav() {
           <DropdownMenuItem>New Team</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={handleLogout}>
           Log out
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>

@@ -84,7 +84,7 @@ export const columns = ({
     },
     {
       accessorKey: "brand",
-      header: ({ column }) => <DataTableColumnHeader column={column} title="Course" />,
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Division" />,
       cell: ({ row }) => {
         const brand = row.getValue("brand") as string
         const brandData = brands.find(b => b.value === brand)
@@ -116,20 +116,8 @@ export const columns = ({
       },
     },
     {
-      accessorKey: "material",
-      header: ({ column }) => <DataTableColumnHeader column={column} title="Joining Date" />,
-      cell: ({ row }) => {
-        const material = row.original.details.material
-        return (
-          <div className="flex space-x-2">
-            <Badge variant="outline">{material}</Badge>
-          </div>
-        )
-      },
-    },
-    {
       accessorKey: "category",
-      header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Roll No" />,
       cell: ({ row }) => {
         const category = row.original.general.category
         const categoryData = categories.find(b => b.value === category)
@@ -146,6 +134,27 @@ export const columns = ({
       },
       accessorFn: (row: Product) => row.general.category,
     },
+    
+    // {
+    //   id: "joiningDate",
+    //   header: ({ column }) => (
+    //     <DataTableColumnHeader column={column} title="Created At" />
+    //   ),
+    //   accessorFn: (row: Product) => row.general?.joiningDate || null, // ✅ sorting/filtering works
+    //   cell: ({ row }) => {
+    //     const joiningDate = row.getValue("joiningDate") as string | null
+    //     return (
+    //       <div className="flex space-x-2">
+    //         <Badge variant="outline">
+    //           {joiningDate ? new Date(joiningDate).toLocaleString() : "N/A"}
+    //         </Badge>
+    //       </div>
+    //     )
+    //   },
+    //   sortingFn: "datetime",
+    // },
+
+
     // {
     //   id: "actions",
     //   cell: ({ row }) => (

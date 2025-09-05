@@ -16,7 +16,7 @@ const normalizeFacultyToProduct = (faculty: any) => ({
         category: faculty.is_active ? "Active Faculty" : "Inactive Faculty",
     },
     details: {
-        material: faculty.email || "",
+        material: faculty.created_date || "",
         careInstructions: [
             faculty.phone_number ? `Phone: ${faculty.phone_number_country_code || ''}${faculty.phone_number}` : "",
             faculty.email ? `Email: ${faculty.email}` : ""

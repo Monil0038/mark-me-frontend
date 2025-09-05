@@ -75,13 +75,13 @@ export default function Sidebar({
                 strokeLinejoin='round'
                 strokeWidth='16'
               ></line>
-              <span className='sr-only'>Website Name</span>
+              <span className='sr-only'>Mark Me</span>
             </svg>
             <div
               className={`flex flex-col justify-end truncate ${isCollapsed ? 'invisible w-0' : 'visible w-auto'}`}
             >
               <span className='font-medium'>Admin</span>
-              <span className='text-xs'>Tan Phat</span>
+              {/* <span className='text-xs'>Mark Me</span> */}
             </div>
           </div>
 

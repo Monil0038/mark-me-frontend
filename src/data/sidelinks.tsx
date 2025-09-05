@@ -20,18 +20,18 @@ export const sidelinks: SideLink[] = [
     href: '/',
     icon: <IconHome size={18} />,
   },
-  {
-    title: 'Dashboard',
-    label: '',
-    href: '/dashboard',
-    icon: <IconLayoutDashboard size={18} />,
-  },
-  {
-    title: 'KanBan',
-    label: '',
-    href: '/kanban',
-    icon: <IconLayoutKanban size={18} />,
-  },
+  // {
+  //   title: 'Dashboard',
+  //   label: '',
+  //   href: '/dashboard',
+  //   icon: <IconLayoutDashboard size={18} />,
+  // },
+  // {
+  //   title: 'KanBan',
+  //   label: '',
+  //   href: '/kanban',
+  //   icon: <IconLayoutKanban size={18} />,
+  // },
   {
     title: 'Faculty',
     label: '',
@@ -53,56 +53,76 @@ export const sidelinks: SideLink[] = [
     // ],
   },
   {
-    title: 'Chats',
+    title: 'Student',
     label: '',
-    href: '/chats',
-    icon: <IconMessages size={18} />,
-  },
-  {
-    title: 'Order',
-    label: '',
-    href: '/order',
-    icon: <IconShoppingCart size={18} />,
-  },
-  {
-    title: 'Calendar',
-    label: '',
-    href: '/calendar',
-    icon: <IconCalendarWeek size={18} />,
-  },
-  {
-    title: 'Email',
-    label: '',
-    href: '/emails',
-    icon: <IconShoppingCart size={18} />,
-    sub: [
-      {
-        title: 'Email',
-        label: '',
-        href: '/emails',
-        icon: <IconBrandProducthunt size={18} />,
-      },
-      {
-        title: 'Send Email',
-        label: '',
-        href: '/emails/send',
-        icon: <IconHexagonNumber1 size={18} />,
-      },
-      
-    ],
-  },
-  {
-    title: 'Tasks',
-    label: '',
-    href: '/tasks',
+    href: '/student',
     icon: <IconChecklist size={18} />,
+    // sub: [
+    //   {
+    //     title: 'Product',
+    //     label: '',
+    //     href: '',
+    //     icon: <IconBrandProducthunt size={18} />,
+    //   },
+    //   {
+    //     title: 'Add Product',
+    //     label: '',
+    //     href: '/product/add-product',
+    //     icon: <IconHexagonNumber1 size={18} />,
+    //   },
+    // ],
   },
-  {
-    title: 'Supports',
-    label: '',
-    href: '/supports',
-    icon: <IconHelpHexagon size={18} />,
-  },
+  // {
+  //   title: 'Chats',
+  //   label: '',
+  //   href: '/chats',
+  //   icon: <IconMessages size={18} />,
+  // },
+  // {
+  //   title: 'Order',
+  //   label: '',
+  //   href: '/order',
+  //   icon: <IconShoppingCart size={18} />,
+  // },
+  // {
+  //   title: 'Calendar',
+  //   label: '',
+  //   href: '/calendar',
+  //   icon: <IconCalendarWeek size={18} />,
+  // },
+  // {
+  //   title: 'Email',
+  //   label: '',
+  //   href: '/emails',
+  //   icon: <IconShoppingCart size={18} />,
+  //   sub: [
+  //     {
+  //       title: 'Email',
+  //       label: '',
+  //       href: '/emails',
+  //       icon: <IconBrandProducthunt size={18} />,
+  //     },
+  //     {
+  //       title: 'Send Email',
+  //       label: '',
+  //       href: '/emails/send',
+  //       icon: <IconHexagonNumber1 size={18} />,
+  //     },
+      
+  //   ],
+  // },
+  // {
+  //   title: 'Tasks',
+  //   label: '',
+  //   href: '/tasks',
+  //   icon: <IconChecklist size={18} />,
+  // },
+  // {
+  //   title: 'Supports',
+  //   label: '',
+  //   href: '/supports',
+  //   icon: <IconHelpHexagon size={18} />,
+  // },
   // {
   //   title: 'Authentication',
   //   label: '',
@@ -141,16 +161,16 @@ export const sidelinks: SideLink[] = [
   //     },
   //   ],
   // },
-  {
-    title: 'Users',
-    label: '',
-    href: '/users',
-    icon: <User2Icon size={18} />,
-  },
-  {
-    title: 'Settings',
-    label: '',
-    href: '/settings',
-    icon: <IconSettings size={18} />,
-  },
+  // {
+  //   title: 'Users',
+  //   label: '',
+  //   href: '/users',
+  //   icon: <User2Icon size={18} />,
+  // },
+  // {
+  //   title: 'Settings',
+  //   label: '',
+  //   href: '/settings',
+  //   icon: <IconSettings size={18} />,
+  // },
 ]
