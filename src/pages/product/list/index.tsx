@@ -1,10 +1,40 @@
 import { DataTable } from '../components/data-table'
 import { columns } from '../components/columns'
 import { products as initialProducts } from '../data/products'
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 import { Product } from '../data/schema'
+import { fetchProducts } from '@/lib/products'
+
 export default function SettingsProfile() {
   const [productsData, setProductsData] = useState<Product[]>(initialProducts)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  // Fetch products from API on component mount
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        setLoading(true)
+        setError(null)
+        const apiProducts = await fetchProducts()
+        
+        if (apiProducts.length > 0) {
+          setProductsData(apiProducts)
+        } else {
+          // If API returns empty array, keep using dummy data as fallback
+          console.warn('API returned no faculties, using dummy data as fallback')
+        }
+      } catch (err) {
+        console.error('Failed to fetch faculties from API:', err)
+        setError('Failed to load faculties from API')
+        // Keep using dummy data as fallback
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadProducts()
+  }, [])
 
   const editProduct = (id: number, updatedProduct: Partial<Product>) => {
     setProductsData(productsData.map(product =>
@@ -64,20 +94,34 @@ export default function SettingsProfile() {
     <>
       <div className='mb-2 flex items-center justify-between space-y-2'>
         <div>
-          <h2 className='text-2xl font-bold tracking-tight'>Welcome back!</h2>
+          <h2 className='text-2xl font-bold tracking-tight'>Faculty Members</h2>
           <p className='text-muted-foreground'>
-            Here&apos;s a list of your tasks for this month!
+            {loading ? 'Loading faculties...' : `Here's a list of your faculties (${productsData.length} items)`}
           </p>
+          {error && (
+            <p className='text-red-500 text-sm mt-1'>
+              {error} - Showing dummy data as fallback
+            </p>
+          )}
         </div>
       </div>
       <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0'>
-        <DataTable
-          data={productsData}
-          columns={productColumns}
-          compareProducts={compareProducts}
-          onCompare={compareProduct}
-          onResetCompare={resetCompareProducts}
-        />
+        {loading ? (
+          <div className="flex items-center justify-center h-32">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto"></div>
+              <p className="mt-2 text-sm text-muted-foreground">Loading faculties...</p>
+            </div>
+          </div>
+        ) : (
+          <DataTable
+            data={productsData}
+            columns={productColumns}
+            compareProducts={compareProducts}
+            onCompare={compareProduct}
+            onResetCompare={resetCompareProducts}
+          />
+        )}
       </div>
     </>
   )
