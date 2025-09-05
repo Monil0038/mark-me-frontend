@@ -35,19 +35,19 @@ const router = createBrowserRouter([
           {
             path: "faculty",
             lazy: async () => ({
-              Component: (await import("./pages/product")).default,
+              Component: (await import("./pages/faculty")).default,
             }),
             children: [
               {
                 index: true,
                 lazy: async () => ({
-                  Component: (await import("./pages/product/list")).default,
+                  Component: (await import("./pages/faculty/list")).default,
                 }),
               },
               {
                 path: "add-faculty",
                 lazy: async () => ({
-                  Component: (await import("./pages/product/add")).default,
+                  Component: (await import("./pages/faculty/add")).default,
                 }),
               },
             ],
