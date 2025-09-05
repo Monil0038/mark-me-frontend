@@ -34,7 +34,7 @@ export default function SettingsAccount() {
   // discard handler
   const handleDiscard = () => {
     if (window.confirm("Are you sure to discard?")) {
-      window.location.href = "/product"
+      window.location.href = "/faculty"
     }
   }
 
@@ -55,7 +55,7 @@ export default function SettingsAccount() {
       })
 
       alert("Faculty saved successfully")
-      window.location.href = "/product"
+      window.location.href = "/faculty"
     } catch (error) {
       console.error(error)
       alert("Failed to save faculty")
