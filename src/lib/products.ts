@@ -46,8 +46,8 @@ const normalizeFacultyToProduct = (faculty: any) => ({
 export const fetchProducts = async () => {
     try {
         // Get token from localStorage
-        // const token = localStorage.getItem("authToken");
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ5OGI4NzU4LTU2ZmUtNDY4MC04YzcwLTA3ZDc0NWYzMDU5YiIsImVtYWlsIjoibW9uaWxzb2ppdHJhLndvcmtAZ21haWwuY29tIiwicm9sZSI6IlNVUEVSX0FETUlOIiwiaXNfYWN0aXZlIjp0cnVlLCJpc19iYW5uZWQiOmZhbHNlLCJleHAiOjE3NTcxNjkxNzcuMjExOTU4fQ.5Kw8J-rGpxeY2ROQyXU0WNnALrw6fUWHtXuV4TN6wgE";
+        const token = localStorage.getItem("authToken");
+        // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ5OGI4NzU4LTU2ZmUtNDY4MC04YzcwLTA3ZDc0NWYzMDU5YiIsImVtYWlsIjoibW9uaWxzb2ppdHJhLndvcmtAZ21haWwuY29tIiwicm9sZSI6IlNVUEVSX0FETUlOIiwiaXNfYWN0aXZlIjp0cnVlLCJpc19iYW5uZWQiOmZhbHNlLCJleHAiOjE3NTcxNjkxNzcuMjExOTU4fQ.5Kw8J-rGpxeY2ROQyXU0WNnALrw6fUWHtXuV4TN6wgE";
         
         const response = await axios.get(API_URL, {
             headers: {
